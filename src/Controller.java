@@ -203,7 +203,7 @@ public class Controller {
                 result = alert.showAndWait();
 
                 if (result.get() == copyButton) {
-                    String link = "https://github.com/Mo3ath97/Cryptography-Application";
+                    String link = "https://github.com/DevMoath/Cryptography-Application";
                     final Clipboard clipboard = Clipboard.getSystemClipboard();
                     final ClipboardContent content = new ClipboardContent();
                     content.putString(link);
