@@ -14,37 +14,37 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="enterButton" defaultButton="true" layoutX="230.0" layoutY="241.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="113.0" snapToPixel="false" style="-fx-background-radius: 20;" text="Enter">
+                <Button fx:id="enterButton" defaultButton="true" layoutX="303.0" layoutY="241.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="113.0" snapToPixel="false" style="-fx-background-radius: 20;" text="Enter">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets></Button>
-                <Label layoutX="200.0" layoutY="55.0" text="Text">
+                <Label layoutX="273.0" layoutY="55.0" text="Text">
                     <font>
                         <Font name="Tw Cen MT" size="20.0" />
                     </font></Label>
-                <RadioButton fx:id="encryptionRadioButton" layoutX="290.0" layoutY="166.0" mnemonicParsing="false" selected="true" text="Encryption">
+                <RadioButton fx:id="encryptionRadioButton" layoutX="363.0" layoutY="166.0" mnemonicParsing="false" selected="true" text="Encryption">
                     <toggleGroup>
                         <ToggleGroup fx:id="operationType" />
                     </toggleGroup>
                 </RadioButton>
-                <RadioButton fx:id="decryptionRadioButton" layoutX="290.0" layoutY="191.0" mnemonicParsing="false" text="Decryption" toggleGroup="$operationType" />
-                <TextField fx:id="textField" layoutX="250.0" layoutY="46.0" prefHeight="39.0" prefWidth="230.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="e.g. Hello" />
-                <Label fx:id="resultLabel" layoutX="66.0" layoutY="355.0" text="Result : ">
+                <RadioButton fx:id="decryptionRadioButton" layoutX="363.0" layoutY="191.0" mnemonicParsing="false" text="Decryption" toggleGroup="$operationType" />
+                <TextField fx:id="textField" layoutX="323.0" layoutY="46.0" prefHeight="39.0" prefWidth="230.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="e.g. Hello" />
+                <Label fx:id="resultLabel" layoutX="139.0" layoutY="355.0" text="Result : ">
                     <font>
                         <Font name="Tw Cen MT" size="24.0" />
                     </font></Label>
-                <Button fx:id="resetButton" layoutX="380.0" layoutY="241.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="113.0" snapToPixel="false" style="-fx-background-radius: 20;" text="Reset" />
-                <TextArea fx:id="resultArea" editable="false" layoutX="144.0" layoutY="327.0" prefHeight="94.0" prefWidth="501.0" wrapText="true" />
-                <Label layoutX="162.0" layoutY="105.0" text="Keyword">
+                <Button fx:id="resetButton" layoutX="453.0" layoutY="241.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="113.0" snapToPixel="false" style="-fx-background-radius: 20;" text="Reset" />
+                <TextArea fx:id="resultArea" editable="false" layoutX="217.0" layoutY="327.0" prefHeight="94.0" prefWidth="501.0" wrapText="true" />
+                <Label layoutX="235.0" layoutY="105.0" text="Keyword">
                     <font>
                         <Font name="Tw Cen MT" size="20.0" />
                     </font>
                 </Label>
-                <TextField fx:id="keywordField" layoutX="250.0" layoutY="96.0" prefHeight="39.0" prefWidth="230.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="e.g. ACT" />
+                <TextField fx:id="keywordField" layoutX="323.0" layoutY="96.0" prefHeight="39.0" prefWidth="230.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="e.g. ACT" />
             </children>
         </Pane>
     </center>
