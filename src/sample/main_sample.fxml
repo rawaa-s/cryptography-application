@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -33,18 +34,23 @@
                 </RadioButton>
                 <RadioButton fx:id="decryptionRadioButton" layoutX="363.0" layoutY="191.0" mnemonicParsing="false" text="Decryption" toggleGroup="$operationType" />
                 <TextField fx:id="textField" layoutX="323.0" layoutY="46.0" prefHeight="39.0" prefWidth="230.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="e.g. Hello" />
-                <Label fx:id="resultLabel" layoutX="139.0" layoutY="355.0" text="Result : ">
+                <Label fx:id="resultLabel" layoutX="139.0" layoutY="347.0" text="Result : ">
                     <font>
                         <Font name="Tw Cen MT" size="24.0" />
                     </font></Label>
                 <Button fx:id="resetButton" layoutX="453.0" layoutY="241.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="113.0" snapToPixel="false" style="-fx-background-radius: 20;" text="Reset" />
-                <TextArea fx:id="resultArea" editable="false" layoutX="217.0" layoutY="327.0" prefHeight="94.0" prefWidth="501.0" wrapText="true" />
+                <TextArea fx:id="resultArea" editable="false" layoutX="217.0" layoutY="319.0" prefHeight="94.0" prefWidth="501.0" wrapText="true" />
                 <Label layoutX="235.0" layoutY="105.0" text="Keyword">
                     <font>
                         <Font name="Tw Cen MT" size="20.0" />
                     </font>
                 </Label>
                 <TextField fx:id="keywordField" layoutX="323.0" layoutY="96.0" prefHeight="39.0" prefWidth="230.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" text="e.g. ACT" />
+            <Hyperlink fx:id="link" layoutX="296.0" layoutY="429.0" text="Made by Moath with JavaFX ">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Hyperlink>
             </children>
         </Pane>
     </center>
@@ -54,11 +60,6 @@
                 <Menu mnemonicParsing="false" text="File">
                     <items>
                         <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem fx:id="aboutusMenuItem" mnemonicParsing="false" text="About us" />
                     </items>
                 </Menu>
             </menus>
