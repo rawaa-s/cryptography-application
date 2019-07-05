@@ -1,17 +1,24 @@
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
-
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Optional;
 
 public class Controller {
 
     public static FXMLLoader loader = Main.loader;
 
-    private MenuItem closeMenuItem, aboutusMenuItem;
+    private MenuItem closeMenuItem;
     private TextField textField, keywordField;
     private TextArea resultArea;
     private RadioButton encryptionRadioButton, decryptionRadioButton;
@@ -23,14 +30,11 @@ public class Controller {
         closeMenuItem = (MenuItem) loader.getNamespace().get("closeMenuItem");
         closeMenuItem.setOnAction((ActionEvent event) -> { menuItemHandled(0); });
 
-        aboutusMenuItem = (MenuItem) loader.getNamespace().get("aboutusMenuItem");
-        aboutusMenuItem.setOnAction((ActionEvent event) -> { menuItemHandled(1); });
-
         textField = (TextField) loader.getNamespace().get("textField");
-        textField.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> { foucsState(newValue, 0); });
+        textField.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> { focusState(newValue, 0); });
 
         keywordField = (TextField) loader.getNamespace().get("keywordField");
-        keywordField.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> { foucsState(newValue, 1); });
+        keywordField.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> { focusState(newValue, 1); });
 
         encryptionRadioButton = (RadioButton) loader.getNamespace().get("encryptionRadioButton");
         encryptionRadioButton.setOnAction((ActionEvent event) -> { changeKeyLabel(); });
@@ -49,9 +53,43 @@ public class Controller {
 
         resetButton = (Button) loader.getNamespace().get("resetButton");
         resetButton.setOnAction((ActionEvent event) -> { resetButton(); });
+
+        this.createLink(loader);
     }
 
-    private void foucsState(boolean value, int number) {
+    private void createLink(FXMLLoader loader) {
+        Hyperlink my_website = (Hyperlink) loader.getNamespace().get("link");
+
+        Background defaultBackground = new Background(new BackgroundFill(Color.CADETBLUE, new CornerRadii(5), Insets.EMPTY));
+        Background hoveredBackground = new Background(new BackgroundFill(Color.DARKCYAN, new CornerRadii(5), Insets.EMPTY));
+
+        my_website.setTextFill(Color.WHITE);
+        my_website.setBackground(defaultBackground);
+
+        my_website.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
+            my_website.setBackground(hoveredBackground);
+        });
+
+        my_website.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
+            my_website.setBackground(defaultBackground);
+        });
+
+        my_website.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String url = "https://moath.cf/";
+                try {
+                    java.awt.Desktop.getDesktop().browse(new URI(url));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void focusState(boolean value, int number) {
 
         switch (number) {
             case 0:
@@ -104,7 +142,7 @@ public class Controller {
                 alert.show();
                 return;
             }
-            String plaintext = "";
+            String plaintext;
             try {
                 plaintext = new Cryptosystem().decryption(textField.getText(), keywordField.getText());
             } catch (Exception e) {
@@ -123,7 +161,7 @@ public class Controller {
                 alert.show();
                 return;
             }
-            String ciphertext = null;
+            String ciphertext;
             try {
                 ciphertext = new Cryptosystem().encryption(textField.getText(), keywordField.getText());
             } catch (Exception e) {
@@ -147,6 +185,7 @@ public class Controller {
     }
 
     private void resetButton(){
+        textField.setText("e.g. Hello");
         keywordField.setText("e.g. ACT");
         encryptionRadioButton.setSelected(true);
         changeKeyLabel();
@@ -184,32 +223,6 @@ public class Controller {
                     // ... user chose "One"
                 } else {
                     // Do Nothing ...
-                }
-                break;
-            case 1: // About Us
-                alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("About Us");
-                alert.setHeaderText(null);
-                alert.setContentText("Hello there, We are three students Moath, Abdullah, and Fisal worked in this project for Information Security Course.\n" +
-                        "You can click copy button to get the source code link.");
-                alert.setWidth(300);
-                alert.setHeight(200);
-
-                ButtonType OKButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
-                ButtonType copyButton = new ButtonType("Copy", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-                alert.getButtonTypes().setAll(copyButton, OKButton);
-
-                result = alert.showAndWait();
-
-                if (result.get() == copyButton) {
-                    String link = "https://github.com/DevMoath/Cryptography-Application";
-                    final Clipboard clipboard = Clipboard.getSystemClipboard();
-                    final ClipboardContent content = new ClipboardContent();
-                    content.putString(link);
-                    clipboard.setContent(content);
-                } else {
-                    // Do Nothing
                 }
                 break;
             default:
