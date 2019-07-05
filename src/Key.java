@@ -11,16 +11,11 @@ public class Key implements Comparable<Key> {
         this.position = position;
     }
 
-    public int compareTo(Key compareFruit) {
-
-        int compareKey = ((Key) compareFruit).key;
-
+    public int compareTo(Key compareKey) {
         //ascending order
-        return this.key - compareKey;
+        return this.key - compareKey.key;
 
         //descending order
-        //return compareQuantity - this.quantity;
-
+        //return compareKey.key - this.key;
     }
-
 }
