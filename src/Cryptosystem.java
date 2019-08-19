@@ -10,8 +10,7 @@ public class Cryptosystem {
 
     private static String alphabet = "abcdefghijklmnopqrstuvwxyz";
 
-    public String encryption(String plaintext, String keyword) throws Exception {
-
+    private Key[] CreateKeyObjects(String keyword) {
         Key[] keys = new Key[keyword.length()];
 
         for (int i = 0; i < keyword.length(); i++) {
@@ -20,11 +19,18 @@ public class Cryptosystem {
                     keys[i] = new Key(j,i);
         }
 
+        return keys;
+    }
+
+    public String encryption(String plaintext, String keyword) throws Exception {
+
+        Key[] keys = this.CreateKeyObjects(keyword);
+
         Arrays.sort(keys);
 
-        String plaintextwithoutspacse = plaintext.replace(" ", "");
+        plaintext = plaintext.replace(" ", "_");
 
-        int row = (int) Math.ceil(plaintextwithoutspacse.length() / (keyword.length() * 1.0));
+        int row = (int) Math.ceil(plaintext.length() / (keyword.length() * 1.0));
         int column = keyword.length();
 
         char[][] array = new char[row][column];
@@ -33,11 +39,11 @@ public class Cryptosystem {
 
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
-                if (counter == plaintextwithoutspacse.length()) {
-                    array[i][j] = 'x';
+                if (counter == plaintext.length()) {
+                    array[i][j] = '%';
                 }
                 else {
-                    array[i][j] = plaintextwithoutspacse.charAt(counter++);
+                    array[i][j] = plaintext.charAt(counter++);
                 }
             }
         }
@@ -61,13 +67,7 @@ public class Cryptosystem {
 
     public String decryption(String ciphrtext, String keyword) throws Exception {
 
-        Key[] keys = new Key[keyword.length()];
-
-        for (int i = 0; i < keyword.length(); i++) {
-            for (int j = 0; j < alphabet.length(); j++)
-                if (String.valueOf(keyword.charAt(i)).equalsIgnoreCase(String.valueOf(alphabet.charAt(j))))
-                    keys[i] = new Key(j,i);
-        }
+        Key[] keys = this.CreateKeyObjects(keyword);
 
         Arrays.sort(keys);
 
@@ -95,7 +95,8 @@ public class Cryptosystem {
                 plaintext += array[i][j];
         }
 
-        plaintext = plaintext.replace("x", "");
+        plaintext = plaintext.replace("%", "");
+        plaintext = plaintext.replace("_", " ");
 
         return plaintext;
     }
