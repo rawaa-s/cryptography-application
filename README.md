@@ -1,20 +1,46 @@
-# Cryptography-Application
-> Application for encrypt/decrypt text using Columnar Keyword Cipher
+# Cryptography Application
+Application for encrypt/decrypt text using Columnar Keyword Cipher
 
-<hr>
+## Table of Content
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [How To Use](#how-to-use)
+* [Example](#example)
 
-## User Manual
-1. Enter your **plaintext** or **cipher text**
-2. Enter the **key**
-3. Choice the function type [ Encrypt OR Decrypt]
+## Requirements
+* [JDK 8 or newer](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* IDE e.g. [IntelliJ IDEA](https://www.jetbrains.com/idea/) (Optional) 
 
-<hr>
+## Installation
+* Download the repository Or clone it using [Git](https://git-scm.com/) clone
 
-### Example
+    ```
+    $ git clone https://github.com/DevMoath/Cryptography-Application.git
+    ```    
+## How To Use
+* Go to ***src*** folder  
+    ```
+    $ cd Cryptography-Application/src
+    ```
+    
+* run ***Main.java***
+    ```
+    $ javac Main.java
+    $ java Main
+    ```
+  
+* Enter your **plaintext** or **cipher text**
+* Enter the **keyword**
+* Choice the function type (Encrypt OR Decrypt)
+* Click Enter button
 
-* Plaintext = Attack
-* Key = key
-* Function Type = Encrypt
+## Example
+Data used
+    
+    Plaintext = Attack
+    Keyword = key
+    Function Type = Encrypt
+    
 
 **The Result**
 
