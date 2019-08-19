@@ -37,10 +37,8 @@ public class Controller {
         keywordField.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> { focusState(newValue, 1); });
 
         encryptionRadioButton = (RadioButton) loader.getNamespace().get("encryptionRadioButton");
-        encryptionRadioButton.setOnAction((ActionEvent event) -> { changeKeyLabel(); });
 
         decryptionRadioButton = (RadioButton) loader.getNamespace().get("decryptionRadioButton");
-        decryptionRadioButton.setOnAction((ActionEvent event) -> { changeKeyLabel(); });
 
         resultLabel = (Label) loader.getNamespace().get("resultLabel");
         resultLabel.setVisible(false);
@@ -132,40 +130,42 @@ public class Controller {
     }
 
     private void enterButton() {
+        if (textField.getText().isEmpty() | textField.getText().equals("e.g. Hello") |
+            keywordField.getText().isEmpty() | keywordField.getText().equals("e.g. Act")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Enter your data");
+            alert.show();
+            return;
+        }
+
+        if (textField.getText().length() <= 1 | keywordField.getText().length() <= 1) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Text and Keyword must be at least 2 characters");
+            alert.show();
+            return;
+        }
 
         if (decryptionRadioButton.isSelected()) {
-            if (textField.getText().isEmpty() || textField.getText().equals("e.g. 0-11382-5521-90-10224-48")) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Enter your data");
-                alert.show();
-                return;
-            }
             String plaintext;
             try {
                 plaintext = new Cryptosystem().decryption(textField.getText(), keywordField.getText());
             } catch (Exception e) {
-                showAlert();
+                showAlert(e.getMessage());
                 return;
             }
             resultArea.setText(plaintext);
             resultArea.setVisible(true);
             resultLabel.setVisible(true);
         } else {
-            if (textField.getText().isEmpty() || textField.getText().equals("e.g. Hello")) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Enter your data");
-                alert.show();
-                return;
-            }
             String ciphertext;
             try {
                 ciphertext = new Cryptosystem().encryption(textField.getText(), keywordField.getText());
             } catch (Exception e) {
-                showAlert();
+                showAlert(e.getMessage());
                 return;
             }
             resultArea.setText(ciphertext);
@@ -174,37 +174,23 @@ public class Controller {
         }
     }
 
-    private void showAlert() {
-
+    private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("Please make sure for your data");
+        alert.setContentText(message);
         alert.show();
         return;
     }
 
     private void resetButton(){
         textField.setText("e.g. Hello");
+        textField.setStyle(textField.getStyle() + "; -fx-border-color: silver");
         keywordField.setText("e.g. ACT");
+        keywordField.setStyle(textField.getStyle() + "; -fx-border-color: silver");
         encryptionRadioButton.setSelected(true);
-        changeKeyLabel();
         resultArea.setVisible(false);
         resultLabel.setVisible(false);
-    }
-
-    private void changeKeyLabel(){
-        if (encryptionRadioButton.isSelected()){
-            if (textField.getText().isEmpty())
-                textField.setStyle(textField.getStyle() + "; -fx-border-color: silver");
-            if (!textField.getText().isEmpty() && textField.getText().equals("e.g. Hello"))
-                textField.setText("e.g. Hello");
-        } else {
-            if (textField.getText().isEmpty())
-                textField.setStyle(textField.getStyle() + "; -fx-border-color: silver");
-            if (!textField.getText().isEmpty() && textField.getText().equals("e.g. ATTACKTO"))
-                textField.setText("e.g. ATTACKTO");
-        }
     }
 
     private void menuItemHandled(int number) {
