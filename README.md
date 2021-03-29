@@ -1,12 +1,6 @@
 # Cryptography Application
 Application for encrypt/decrypt text using Columnar Keyword Cipher
 
-## Table of Content
-* [Requirements](#requirements)
-* [Installation](#installation)
-* [How To Use](#how-to-use)
-* [Example](#example)
-
 ## Requirements
 * [JDK 8 or newer](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * IDE e.g. [IntelliJ IDEA](https://www.jetbrains.com/idea/) (Optional) 
